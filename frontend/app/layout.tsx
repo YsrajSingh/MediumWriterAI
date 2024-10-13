@@ -1,6 +1,10 @@
+import {
+  ClerkProvider
+} from '@clerk/nextjs'
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from '@/utils/header/page';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,13 +27,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const APP_NAME: string = process.env.NEXT_PUBLIC_APP_NAME || 'Default App Name';
+
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+            <Header appName={APP_NAME}/>
+            {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
