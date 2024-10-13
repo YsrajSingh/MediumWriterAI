@@ -1,15 +1,16 @@
 "use client"
 import React from "react";
-import { Layout, Menu, theme } from "antd";
-const { Header, Content, Footer, Sider } = Layout;
+import { Layout, Menu } from "antd";
+const { Sider } = Layout;
 import {
+    SettingOutlined,
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
 } from "@ant-design/icons";
 
 const items = [
-    UserOutlined,
+    SettingOutlined,
     VideoCameraOutlined,
     UploadOutlined,
     UserOutlined,
@@ -22,7 +23,7 @@ const items = [
 export default function NavigationMenu() {
     return (
         <Sider
-            breakpoint="lg"
+            breakpoint="xl"
             collapsedWidth="0"
             onBreakpoint={(broken) => {
                 console.log(broken);
