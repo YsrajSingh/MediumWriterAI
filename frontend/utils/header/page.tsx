@@ -1,17 +1,25 @@
+"use client";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { Layout, Menu, theme } from "antd";
+
+const { Header } = Layout;
 
 // Define the props type for the Header component
 interface HeaderProps {
     appName: string;
 }
 
-export default function Header({ appName }: HeaderProps) {
+export default function ProfileHeader({ appName }: HeaderProps) {
+    const {
+        token: { colorBgContainer, borderRadiusLG },
+    } = theme.useToken();
     return (
-        <header
+        <Header
             style={{
+                background: colorBgContainer,
                 display: "flex",
                 justifyContent: "space-between",
-                padding: 20,
+                alignItems: "center",
             }}
         >
             <h1>{appName}</h1>
@@ -21,6 +29,6 @@ export default function Header({ appName }: HeaderProps) {
             <SignedOut>
                 <SignInButton />
             </SignedOut>
-        </header>
+        </Header>
     );
 }
