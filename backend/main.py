@@ -1,8 +1,8 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
-from middleware import JWTMiddleware
+from middleware import ClerkAuthMiddleware
 from endpoints import users
 from fastapi.openapi.utils import get_openapi
 from schemas.index import Quote
@@ -21,9 +21,7 @@ app.add_middleware(
 )
 
 app.add_middleware(
-    JWTMiddleware,
-    secret_key=os.getenv('SECRET_KEY'),
-    algorithm=os.getenv('ALGORITHM')
+    ClerkAuthMiddleware
 )
 
 api_routers = [
@@ -42,6 +40,17 @@ async def root():
         "message": quote_of_the_time.message,
     }
 
+@app.get("/protected")
+async def protected_route(request: Request):
+    if not hasattr(request.state, "user_id"):
+        raise HTTPException(status_code=401, detail="User not authenticated")
+    
+    return {"message": f"Welcome user {request.state.user_id}!"}
+
+# Public route (no authentication required)
+@app.get("/public")
+async def public_route():
+    return {"message": "This is a public route!"}
 
 def custom_openapi():
     if app.openapi_schema:

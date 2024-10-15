@@ -1,30 +1,28 @@
-from fastapi import Request, HTTPException, status
-from jose import JWTError, jwt
+from fastapi import Request, HTTPException
 from starlette.middleware.base import BaseHTTPMiddleware
-from fastapi.responses import JSONResponse
+import os
+from clerk import Client
 
-class JWTMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app, secret_key: str, algorithm: str):
-        super().__init__(app)
-        self.secret_key = secret_key
-        self.algorithm = algorithm
 
+clerk_client = Client(api_key=os.getenv("CLERK_SECRET_KEY"))
+
+# Middleware to verify Clerk JWT and extract the user ID
+class ClerkAuthMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
-        if request.method == "OPTIONS":
-            return await call_next(request)
+        authorization_header = request.headers.get("Authorization")
 
-        if request.url.path in ["/api/token", "/api/users", "/docs", "/openapi.json", "/"]:
-            return await call_next(request)
+        if not authorization_header or not authorization_header.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Authorization header missing or invalid")
 
-        token = request.headers.get('Authorization')
-        if token is None:
-            return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"message": "Authentication Failed, Invalid Token"})
+        token = authorization_header.split(" ")[1]
 
         try:
-            token = token.replace('Bearer ', '')
-            payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm])
-            request.state.user_id = payload.get('user_id')
-        except JWTError:
-            return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"message": "Invalid Token"})
+            # Verify token using Clerk's SDK
+            session = clerk_client.verify_token(token)
+            # Attach the user ID to the request for further processing
+            request.state.user_id = session['sub']  # 'sub' contains the Clerk user ID
+        except Exception as e:
+            raise HTTPException(status_code=401, detail="Invalid token")
 
-        return await call_next(request)
+        response = await call_next(request)
+        return response
