@@ -1,10 +1,12 @@
 "use client";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Layout, Menu, theme } from "antd";
+import { Typography } from 'antd';
 
+const { Title } = Typography;
 const { Header } = Layout;
 
-// Define the props type for the Header component
+
 interface HeaderProps {
     appName: string;
 }
@@ -22,7 +24,7 @@ export default function ProfileHeader({ appName }: HeaderProps) {
                 alignItems: "center",
             }}
         >
-            <h1>{appName}</h1>
+            <Title level={4} style={{ margin: 0 }}>{appName}</Title>
             <SignedIn>
                 <UserButton />
             </SignedIn>

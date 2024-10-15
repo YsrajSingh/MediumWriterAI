@@ -26,6 +26,34 @@ export const metadata: Metadata = {
 
 const { Header, Content, Footer, Sider } = Layout;
 
+const menuItems = [
+    {
+      key: "1",
+      label: "Accounts",
+      link: "/accounts",
+    },
+    {
+      key: "yashraj-singh",
+      label: "Yashraj Singh",
+      children: [
+        { key: "yashraj-singh-manage", label: "Manage", link: "/option5/settings" },
+        { key: "yashraj-singh-list", label: "List", link: "/option6/articles" },
+      ],
+    },
+    {
+        key: "aman-singh",
+        label: "Aman Singh",
+        children: [
+          { key: "aman-singh-manage", label: "Manage", link: "/option5/settings" },
+          { key: "aman-singh-list", label: "List", link: "/option6/articles" },
+        ],
+    },
+  ];
+
+    const logoSrc = "/images/logo/NexPost.png";
+    const logoAlt = "NexPost";
+
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -41,7 +69,7 @@ export default function RootLayout({
                     className={`${geistSans.variable} ${geistMono.variable} antialiased`}
                 >
                     <Layout>
-                        <NavigationMenu />
+                        <NavigationMenu menuItems={menuItems} logoSrc={logoSrc} logoAlt={logoAlt} />
                         <Layout>
                             <ProfileHeader appName={APP_NAME} />
                             <Wrapper>{children}</Wrapper>

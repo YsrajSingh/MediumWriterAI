@@ -1,45 +1,53 @@
 "use client";
 
-import { Button, Modal } from "antd";
-import { useState } from "react";
+import { Button, Modal, Space } from "antd";
+import React from "react";
 
-export default function AysncModal() {
-    const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState("Content of the modal");
+interface AsyncModalProps {
+    open: boolean;
+    confirmLoading: boolean;
+    modalText: string|null;
+    onShowModal: () => void;
+    onOk: () => void;
+    onCancel: () => void;
+    children: React.ReactNode;
+}
 
-    const showModal = () => {
-        setOpen(true);
-    };
-
-    const handleOk = () => {
-        setModalText("The modal will be closed after two seconds");
-        setConfirmLoading(true);
-        setTimeout(() => {
-            setOpen(false);
-            setConfirmLoading(false);
-        }, 2000);
-    };
-
-    const handleCancel = () => {
-        console.log("Clicked cancel button");
-        setOpen(false);
-    };
-
+const AsyncModal: React.FC<AsyncModalProps> = ({
+    open,
+    confirmLoading,
+    modalText,
+    onShowModal,
+    onOk,
+    onCancel,
+    children,
+}) => {
     return (
         <>
-            <Button type="primary" onClick={showModal}>
-                Open Modal with async logic
-            </Button>
+            <Space
+                style={{
+                    marginBottom: 16,
+                    display: "flex",
+                    justifyContent: "end",
+                }}
+            >
+                <Button type="primary" onClick={onShowModal}>
+                    Create new account
+                </Button>
+            </Space>
             <Modal
-                title="Title"
+                title="Create Account"
                 open={open}
-                onOk={handleOk}
+                onOk={onOk}  // Calls the parent function to handle submit
                 confirmLoading={confirmLoading}
-                onCancel={handleCancel}
+                onCancel={onCancel}  // Closes the modal without submitting
+                footer={null}  // We don't want any buttons here, handled by form
             >
                 <p>{modalText}</p>
+                {children}
             </Modal>
         </>
     );
-}
+};
+
+export default AsyncModal;
