@@ -2,6 +2,19 @@
 
 This project automates content creation for Medium using AI. Users provide a CSV with titles, keywords, and target audiences. The AI generates engaging articles, which are refined for quality and SEO. The Medium API automates posting, allowing for daily articles. Analytics track performance, enabling ongoing content strategy improvements.
 
+
+---
+
+# 🔔 Important Announcement! 🔔
+
+**🚨 Attention: The app is currently under development and not yet available for use. Please stay tuned for updates!** 
+
+**👉 [Learn More Here](#)**
+
+---
+
+
+
 ## Project Structure
 
 ```
