@@ -1,42 +1,31 @@
 "use client";
 
-import { Button, Modal, Space } from "antd";
+import { Button, Modal, Space } from "antd";    
 import React from "react";
 
 interface AsyncModalProps {
+    title: string;
     open: boolean;
     confirmLoading: boolean;
     modalText: string|null;
-    onShowModal: () => void;
+    // onShowModal: () => void;
     onOk: () => void;
     onCancel: () => void;
     children: React.ReactNode;
 }
 
 const AsyncModal: React.FC<AsyncModalProps> = ({
+    title,
     open,
     confirmLoading,
     modalText,
-    onShowModal,
     onOk,
     onCancel,
     children,
 }) => {
     return (
-        <>
-            <Space
-                style={{
-                    marginBottom: 16,
-                    display: "flex",
-                    justifyContent: "end",
-                }}
-            >
-                <Button type="primary" onClick={onShowModal}>
-                    Create new account
-                </Button>
-            </Space>
             <Modal
-                title="Create Account"
+                title={title}
                 open={open}
                 onOk={onOk}  // Calls the parent function to handle submit
                 confirmLoading={confirmLoading}
@@ -46,7 +35,6 @@ const AsyncModal: React.FC<AsyncModalProps> = ({
                 <p>{modalText}</p>
                 {children}
             </Modal>
-        </>
     );
 };
 

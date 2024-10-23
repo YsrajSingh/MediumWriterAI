@@ -13,7 +13,14 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
     } = theme.useToken();
 
     return (
-        <Content style={{ margin: "24px 16px 0" }}>
+        <Content
+            className="content-inner"
+            style={{
+                overflowY: "scroll",
+                padding: "20px",
+                height: "calc(100vh - 64px)", // Adjust this based on your Header's height
+            }}
+        >
             <div
                 style={{
                     padding: 24,

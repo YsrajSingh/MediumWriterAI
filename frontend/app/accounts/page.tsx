@@ -6,7 +6,7 @@ import IndependentForm from "@/utils/form/page";
 import AsyncModal from "@/utils/modal/page";
 import PaginatedTable from "@/utils/table/page";
 import NotificationToast from "@/utils/NotifyToast/page";
-import { Modal, notification } from "antd";
+import { Modal, notification, Button, Space } from "antd";
 
 export default function Accounts() {
     const [open, setOpen] = useState(false);
@@ -119,11 +119,23 @@ export default function Accounts() {
 
     return (
         <>
+            <Space
+                style={{
+                    marginBottom: 16,
+                    display: "flex",
+                    justifyContent: "end",
+                }}
+            >
+                <Button type="primary" onClick={showModal}>
+                    Create new account
+                </Button>
+            </Space>
             <AsyncModal
+                title="Create Account"
                 open={open}
                 confirmLoading={confirmLoading}
                 modalText={null}
-                onShowModal={showModal}
+                // onShowModal={showModal}
                 onOk={handleOk}
                 onCancel={handleCancel}
             >
@@ -148,10 +160,11 @@ export default function Accounts() {
             />
 
             <AsyncModal
+                title="Edit Account"
                 open={openEditModal}
                 confirmLoading={false}
                 modalText={`Edit record for ${selectedRecord?.name}`}
-                onShowModal={() => setOpenEditModal(true)}
+                // onShowModal={() => setOpenEditModal(true)}
                 onOk={() => {
                     console.log("Updated Record:", selectedRecord);
                     setOpenEditModal(false);
