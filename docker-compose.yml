@@ -1,38 +1,18 @@
 services:
-  frontend:
+  application:
     build:
       context: .
-      dockerfile: ./frontend/docker/Dockerfile
-    container_name: next_app
+      dockerfile: ./docker/Dockerfile
+    container_name: application
     restart: unless-stopped
     ports:
       - "${FRONTEND_PORT}:3000"
     volumes:
-      - ./frontend:/app
-    env_file:
-      - .env
-    depends_on:
-      - backend
-      - postgres
-    networks:
-      - backend_network
-
-  backend:
-    build:
-      context: .
-      dockerfile: ./backend/docker/Dockerfile
-    container_name: fastapi_app
-    restart: unless-stopped
-    ports:
-      - "${BACKEND_PORT}:80"
-    volumes:
-      - ./backend:/app
+      - .:/app
     env_file:
       - .env
     depends_on:
       - postgres
-    environment:
-      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
     networks:
       - backend_network
 
@@ -65,7 +45,7 @@ services:
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
       PGADMIN_ENABLE_PASSWORD_RECOVERY: 'True'
     volumes:
-        - ./backend/docker/pgadmin/servers.json:/pgadmin4/servers.json
+        - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
     networks:
       - backend_network
     depends_on:
