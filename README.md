@@ -1,104 +1,36 @@
-# Medium Writer AI
-
-This project automates content creation for Medium using AI. Users provide a CSV with titles, keywords, and target audiences. The AI generates engaging articles, which are refined for quality and SEO. The Medium API automates posting, allowing for daily articles. Analytics track performance, enabling ongoing content strategy improvements.
-
-
----
-
-# 🔔 Important Announcement! 🔔
-
-**🚨 Attention: The app is currently under development and not yet available for use. Please stay tuned for updates!** 
-
-**👉 [Learn More Here](#)**
-
----
-
-
-
-## Project Structure
-
-```
-/mediumwriterai
-├── /frontend                # Next.js app
-│   ├── /app
-│   ├── /docker/Dockerfile
-│   ├── package.json
-│   └── ...other config files
-├── /backend                 # FastAPI app
-│   ├── /schemas
-│   ├── /docker/Dockerfile
-│   ├── main.py
-│   ├── requirements.txt
-│   └── ...other config files
-├── docker-compose.yml       # Docker Compose file
-└── README.md
-```
-
-## Technologies Used
-- **Frontend** : Next.js
-- **Backend** : FastAPI
-- **Containerization** : Docker
-- **Development** : Docker Volumes for live reloading
-
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-### Prerequisites
-- Install [Docker](https://docs.docker.com/get-started/get-docker/)
-- Install [Docker Compose](https://docs.docker.com/compose/install/)
+First, run the development server:
 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-### Setup Instructions
-- **Clone the Repository**:
-    ```
-    git clone https://github.com/YsrajSingh/nextjs-fastapi-docker.git
-    cd nextjs-fastapi-docker
-    ```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- **Build and Run the Application**: Use Docker Compose to build and run the containers.
-    ```
-    docker-compose up -d --build
-    ```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Accessing the Applications
-- **Frontend**: Open your browser and go to [http://localhost:3000](http://localhost:3000).
-- **Backend**: Open your browser and go to [http://localhost:8000](http://localhost:8000).
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Learn More
 
-### Directory Overview
-- **frontend/**: Contains the Next.js application.
+To learn more about Next.js, take a look at the following resources:
 
-    - **Dockerfile**: Defines the Docker image for the Next.js frontend.
-    - **package.json**: Manages frontend dependencies.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- **backend/**: Contains the FastAPI application.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-    - **Dockerfile**: Defines the Docker image for the FastAPI backend.
-    - **main.py**: The main FastAPI application file.
-    - **requirements.txt**: Lists the Python dependencies.
+## Deploy on Vercel
 
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### Commands to Run
-- **Build and Start**:
-    ```
-    docker-compose up -d --build
-    ```
-
-- Stop the Containers:
-    ```
-    docker-compose down
-    ```
-
-### Additional Information
-- For more details about Next.js, visit [Next.js Documentation](https://nextjs.org/docs).
-- For more details about FastAPI, visit [FastAPI Documentation](https://fastapi.tiangolo.com/).
-
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/YsrajSingh/MediumWriterAI/blob/main/LICENSE) file for details.
-
-
-## Acknowledgments
-This project demonstrates a basic setup of Next.js and FastAPI using Docker, showcasing how to work with modern web technologies.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
