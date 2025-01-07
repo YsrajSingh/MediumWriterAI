@@ -7,7 +7,7 @@ This project automates content creation for Medium using AI. Users provide a CSV
 
 # 🔔 Important Announcement! 🔔
 
-**🚨 Attention: The app is currently under development and not yet available for use. Please stay tuned for updates!** 
+**🚨 Attention: The app is currently under development and not yet available for use. Please stay tuned for updates! As Medium deprecated the integration tokens as per [official docs](https://help.medium.com/hc/en-us/articles/213480228-API-Importing), the Idea is deprecated. We will stay updated with Medium's new announcements.**
 
 **👉 [Learn More Here](#)**
 
